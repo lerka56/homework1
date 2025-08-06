@@ -1,23 +1,11 @@
 const cookie = document.getElementById('cookie');
 const counter = document.getElementById('clicker__counter');
 
-let clicks = 0;
-let isShrinked = false; // признак того, что печенька уменьшена
-
-// Исходный размер
-const originalSize = 200;
-const shrinkSize = 150;
-
 cookie.addEventListener('click', () => {
   // Увеличиваем счётчик и обновляем на странице
-  clicks += 1;
-  counter.textContent = clicks;
+  counter.textContent = +counter.textContent + 1;
 
-  // Чередуем размер печеньки
-  if (isShrinked) {
-    cookie.style.width = originalSize + 'px';
-  } else {
-    cookie.style.width = shrinkSize + 'px';
-  }
-  isShrinked = !isShrinked;
+  // Чередуем размер печеньки: нечётный клик — маленький размер, чётный — большой
+  cookie.style.width = (counter.textContent % 2) ? '150px' : '200px';
+  cookie.style.height = cookie.style.width; // если нужна квадратная печенька
 });
